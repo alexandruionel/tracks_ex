@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import sqlite3
 
 conn = sqlite3.connect("trackdb.sqlite")
-cur = conn.cursor
+cur = conn.cursor()
 
 #Create tables in sql db
 
@@ -62,11 +62,12 @@ for entry in all:
     print(name, artist, album, count, rating, length)
     
     cur.execute("""INSERT OR IGNORE INTO Artist (name) VALUES ( ? )""", (artist, ))    
-    cur.execute(" SELECT id FROM Artist WHERE name = ?" (artist, ))
+
+    cur.execute(" SELECT id FROM Artist WHERE name = ?", (artist, ))
     artist_id = cur.fetchone()[0]
     
     cur.execute("""INSERT OR IGNORE INTO Album (title, artist_id) VALUES ( ?, ? )""", (album, artist_id))
-    cur.execute(" SELECT id FROM Album WHERE title = ?" (album, ))
+    cur.execute(" SELECT id FROM Album WHERE title = ?", (album, ))
     album_id = cur.fetchone()[0]
     
     cur.execute("""INSERT OR REPLACE INTO Track(title, album_id, len, rating, count) VALUES ( ?, ?, ?, ?, ? )""",
