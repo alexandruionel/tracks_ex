@@ -27,7 +27,7 @@ CREATE TABLE Track (
     title TEXT UNIQUE,
     album_id INTEGER,
     len INTEGER, rating INTEGER, count INTEGER
-);
+)
 """)
 
 fname = input("enter file name: ")
@@ -69,4 +69,8 @@ for entry in all:
     cur.execute(" SELECT id FROM Album WHERE title = ?" (album, ))
     album_id = cur.fetchone()[0]
     
+    cur.execute("""INSERT OR REPLACE INTO Track(title, album_id, len, rating, count) VALUES ( ?, ?, ?, ?, ? )""",
+                (name, album_id, length, rating, count) )
+    
+    conn.commit()
     
